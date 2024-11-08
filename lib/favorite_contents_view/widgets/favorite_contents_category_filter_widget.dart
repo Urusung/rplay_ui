@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rplay_ui/home_view/riverpod/home_riverpod.dart';
+import 'package:rplay_ui/favorite_contents_view/riverpod/favorite_contents_riverpod.dart';
 
 class FavoriteContentsCategoryFilterWidget extends ConsumerWidget {
   const FavoriteContentsCategoryFilterWidget({super.key});
@@ -13,7 +13,8 @@ class FavoriteContentsCategoryFilterWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCategoryIndex = ref.watch(selectedCategoryIndexProvider);
+    final favoriteContentsCategoryIndex =
+        ref.watch(favoriteContentsCategoryIndexProvider);
 
     return Padding(
       padding: const EdgeInsets.only(left: 16.0),
@@ -24,21 +25,22 @@ class FavoriteContentsCategoryFilterWidget extends ConsumerWidget {
           (index) {
             return GestureDetector(
               onTap: () {
-                ref.read(selectedCategoryIndexProvider.notifier).state = index;
+                ref.read(favoriteContentsCategoryIndexProvider.notifier).state =
+                    index;
               },
               child: Container(
                 width: 82,
                 height: 44,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: selectedCategoryIndex == index
+                  color: favoriteContentsCategoryIndex == index
                       ? const Color.fromARGB(255, 0, 178, 255)
                       : const Color.fromARGB(255, 32, 32, 36),
                   borderRadius: BorderRadius.circular(22),
                 ),
                 child: Text(
                   list[index],
-                  style: selectedCategoryIndex == index
+                  style: favoriteContentsCategoryIndex == index
                       ? const TextStyle(
                           fontSize: 14,
                           color: Colors.white,

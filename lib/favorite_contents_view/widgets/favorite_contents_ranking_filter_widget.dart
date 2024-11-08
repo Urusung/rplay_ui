@@ -12,9 +12,10 @@ class FavoriteContentsRankingFilterWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCategoryIndex = ref.watch(selectedCategoryIndexProvider);
-    final rankingCarouselController =
-        ref.read(rankingCarouselControllerProvider);
+    final favoriteContentsRankingIndex =
+        ref.watch(favoriteContentsRankingIndexProvider);
+    final favoriteContentsRankingCarouselController =
+        ref.read(favoriteContentsRankingCarouselControllerProvider);
 
     return Wrap(
       spacing: 24,
@@ -23,8 +24,10 @@ class FavoriteContentsRankingFilterWidget extends ConsumerWidget {
         (index) {
           return GestureDetector(
             onTap: () {
-              ref.read(selectedCategoryIndexProvider.notifier).state = index;
-              rankingCarouselController.animateToPage(
+              print('tap');
+              ref.read(favoriteContentsRankingIndexProvider.notifier).state =
+                  index;
+              favoriteContentsRankingCarouselController.animateToPage(
                 0,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
@@ -38,7 +41,7 @@ class FavoriteContentsRankingFilterWidget extends ConsumerWidget {
                 border: Border(
                   bottom: BorderSide(
                     width: 2,
-                    color: selectedCategoryIndex == index
+                    color: favoriteContentsRankingIndex == index
                         ? const Color.fromARGB(255, 0, 178, 255)
                         : const Color.fromARGB(255, 32, 32, 36),
                   ),

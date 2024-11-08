@@ -48,25 +48,27 @@ class FavoriteContentsRankingCarouselSliderWidget extends ConsumerWidget {
       return chunks;
     }
 
-    final selectedCategoryIndex = ref.watch(selectedCategoryIndexProvider);
-    final currentCarouselIndex = ref.watch(currentCarouselIndexProvider);
-    final rankingCarouselController =
-        ref.read(rankingCarouselControllerProvider);
+    final favoriteContentsRankingCarouselIndex =
+        ref.watch(favoriteContentsRankingCarouselIndexProvider);
+    final favoriteContentsRankingCarouselController =
+        ref.read(favoriteContentsRankingCarouselControllerProvider);
 
     return Column(
       children: [
         CarouselSlider(
-          carouselController: rankingCarouselController,
+          carouselController: favoriteContentsRankingCarouselController,
           options: CarouselOptions(
             height: 432,
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 10),
             viewportFraction: 1,
             onPageChanged: (index, reason) {
-              ref.read(currentCarouselIndexProvider.notifier).state = index;
+              ref
+                  .read(favoriteContentsRankingCarouselIndexProvider.notifier)
+                  .state = index;
             },
           ),
-          items: getChunks(selectedCategoryIndex == 0).map(
+          items: getChunks(favoriteContentsRankingCarouselIndex == 0).map(
             (page) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,17 +84,23 @@ class FavoriteContentsRankingCarouselSliderWidget extends ConsumerWidget {
         const Gap(24),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: getChunks(selectedCategoryIndex == 0).asMap().entries.map(
+          children: getChunks(favoriteContentsRankingCarouselIndex == 0)
+              .asMap()
+              .entries
+              .map(
             (entry) {
               return GestureDetector(
-                onTap: () => rankingCarouselController.animateToPage(entry.key),
+                onTap: () => favoriteContentsRankingCarouselController
+                    .animateToPage(entry.key),
                 child: Container(
-                  width: currentCarouselIndex == entry.key ? 16.0 : 8.0,
+                  width: favoriteContentsRankingCarouselIndex == entry.key
+                      ? 16.0
+                      : 8.0,
                   height: 8.0,
                   margin: const EdgeInsets.only(right: 3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: currentCarouselIndex == entry.key
+                    color: favoriteContentsRankingCarouselIndex == entry.key
                         ? const Color.fromARGB(255, 0, 178, 255)
                         : const Color.fromARGB(255, 175, 175, 175),
                   ),

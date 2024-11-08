@@ -17,7 +17,8 @@ class HomeCarouselSliderWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final suggestedContentIndex = ref.watch(suggestedContentIndexProvider);
+    final homeSuggestedContentIndex =
+        ref.watch(homeuSggestedContentIndexProvider);
     final CarouselSliderController controller = CarouselSliderController();
 
     return Stack(
@@ -31,7 +32,8 @@ class HomeCarouselSliderWidget extends ConsumerWidget {
             autoPlayInterval: const Duration(seconds: 10),
             viewportFraction: 1,
             onPageChanged: (index, reason) {
-              ref.read(suggestedContentIndexProvider.notifier).state = index;
+              ref.read(homeuSggestedContentIndexProvider.notifier).state =
+                  index;
             },
           ),
           items: imageList
@@ -51,12 +53,12 @@ class HomeCarouselSliderWidget extends ConsumerWidget {
                 return GestureDetector(
                   onTap: () => controller.animateToPage(entry.key),
                   child: Container(
-                    width: suggestedContentIndex == entry.key ? 16.0 : 8.0,
+                    width: homeSuggestedContentIndex == entry.key ? 16.0 : 8.0,
                     height: 8.0,
                     margin: const EdgeInsets.only(right: 3),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: suggestedContentIndex == entry.key
+                      color: homeSuggestedContentIndex == entry.key
                           ? const Color.fromARGB(255, 0, 178, 255)
                           : const Color.fromARGB(255, 175, 175, 175),
                     ),

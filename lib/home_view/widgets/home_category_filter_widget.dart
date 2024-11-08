@@ -16,7 +16,7 @@ class HomeCategoryFilterWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCategoryIndex = ref.watch(selectedCategoryIndexProvider);
+    final homeCategoryIndex = ref.watch(homeCategoryIndexProvider);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -27,21 +27,21 @@ class HomeCategoryFilterWidget extends ConsumerWidget {
           (index) {
             return GestureDetector(
               onTap: () {
-                ref.read(selectedCategoryIndexProvider.notifier).state = index;
+                ref.read(homeCategoryIndexProvider.notifier).state = index;
               },
               child: Container(
                 width: 112,
                 height: 44,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: selectedCategoryIndex == index
+                  color: homeCategoryIndex == index
                       ? const Color.fromARGB(255, 0, 178, 255)
                       : const Color.fromARGB(255, 32, 32, 36),
                   borderRadius: BorderRadius.circular(22),
                 ),
                 child: Text(
                   list[index],
-                  style: selectedCategoryIndex == index
+                  style: homeCategoryIndex == index
                       ? const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
